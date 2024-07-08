@@ -6,11 +6,13 @@ namespace DoctorApp.Services.Data.Repositorio
     {
         private readonly ApplicationDbContext _context;
         public IEspecialidadRepositorio Especialidad { get; private set; }
+        public IMedicoRepositorio Medico { get; private set; }
 
         public UnidadTrabajo(ApplicationDbContext context)
         {
             _context = context;
             Especialidad = new EspecialidadRepositorio(_context);
+            Medico = new MedicoRepositorio(_context);
         }
 
         public async Task Guardar()

@@ -12,7 +12,7 @@ namespace DoctorApp.Services.BLL.Servicios.Interfaces
         Task<IEnumerable<EspecialidadDto>> ObtenerTodos();
         Task<EspecialidadDto> Agregar(EspecialidadDto modeloDto);
         Task Actualizar(EspecialidadDto modeloDto);
-
         Task Remover(int id);
+        Task<IEnumerable<EspecialidadDto>> ObtenerActivos();
     }
 }
