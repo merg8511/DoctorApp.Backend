@@ -103,5 +103,21 @@ namespace DoctorApp.Services.BLL.Servicios
                 throw;
             }
         }
+
+        public async Task<IEnumerable<EspecialidadDto>> ObtenerActivos()
+        {
+            try
+            {
+                var lista = await _unidadTrabajo.Especialidad.ObtenerTodos(
+                                                       e => e.Estado == true,
+                                                       orderBy: e => e.OrderBy(e => e.NombreEspecialidad));
+
+                return _mapper.Map<IEnumerable<EspecialidadDto>>(lista);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -24,51 +24,43 @@ namespace DoctorApp.Services.Data.Repositorio
             await _dbSet.AddAsync(entidad);
         }
 
-        public async Task<IEnumerable<T>> ObtenerTodos(Expression<Func<T, bool>> filtro = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            string incluirPropiedades = null)
+        public async Task<IEnumerable<T>> ObtenerTodos(Expression<Func<T, bool>> filtro = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string incluirPropiedades = null)
         {
             IQueryable<T> query = _dbSet;
-
             if (filtro != null)
             {
                 query = query.Where(filtro);
             }
-
             if (incluirPropiedades != null)
             {
-                foreach (var property in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var ip in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(property);
+                    query = query.Include(ip);
                 }
             }
-
             if (orderBy != null)
             {
                 return await orderBy(query).ToListAsync();
             }
-
             return await query.ToListAsync();
+
         }
 
 
         public async Task<T> ObtenerPrimero(Expression<Func<T, bool>> filtro = null, string incluirPropiedades = null)
         {
             IQueryable<T> query = _dbSet;
-
             if (filtro != null)
             {
                 query = query.Where(filtro);
             }
-
             if (incluirPropiedades != null)
             {
-                foreach (var property in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var ip in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(property);
+                    query = query.Include(ip);
                 }
             }
-
 
             return await query.FirstOrDefaultAsync();
         }

@@ -20,7 +20,7 @@ namespace DoctorApp.Services.Data.Repositorio
         {
             var especialidadDb = _context.Especialidades.FirstOrDefault(e => e.Id == especialidad.Id);
 
-            if (especialidad != null)
+            if (especialidadDb != null)
             {
                 especialidadDb.NombreEspecialidad = especialidad.NombreEspecialidad;
                 especialidadDb.Descripcion = especialidad.Descripcion;

@@ -5,12 +5,12 @@ using System.Net;
 
 namespace DoctorApp.Services.API.Controllers
 {
-    public class EspecialidadController : BaseApiController
+    public class MedicoController : BaseApiController
     {
-        public readonly IEspecialidadServicio _service;
+        public readonly IMedicoServicio _service;
         private ApiResponse _response;
 
-        public EspecialidadController(IEspecialidadServicio service)
+        public MedicoController(IMedicoServicio service)
         {
             _service = service;
             _response = new();
@@ -35,27 +35,8 @@ namespace DoctorApp.Services.API.Controllers
             return Ok(_response);
         }
 
-        [HttpGet("ListadoActivos")]
-        public async Task<IActionResult> GetActivos()
-        {
-            try
-            {
-                _response.Resultado = await _service.ObtenerActivos();
-                _response.IsExitoso = true;
-                _response.StatusCode = HttpStatusCode.OK;
-            }
-            catch (Exception ex)
-            {
-                _response.IsExitoso = false;
-                _response.Mensaje = ex.Message;
-                _response.StatusCode = HttpStatusCode.BadRequest;
-            }
-
-            return Ok(_response);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Crear(EspecialidadDto modeloDto)
+        public async Task<IActionResult> Crear(MedicoDto modeloDto)
         {
             try
             {
@@ -74,7 +55,7 @@ namespace DoctorApp.Services.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Editar(EspecialidadDto modeloDto)
+        public async Task<IActionResult> Editar(MedicoDto modeloDto)
         {
             try
             {
@@ -110,6 +91,5 @@ namespace DoctorApp.Services.API.Controllers
 
             return Ok(_response);
         }
-
     }
 }
