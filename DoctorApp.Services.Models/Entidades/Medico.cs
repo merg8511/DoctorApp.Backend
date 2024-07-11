@@ -25,7 +25,7 @@ namespace DoctorApp.Services.Models.Entidades
         [StringLength(100, MinimumLength = 1, ErrorMessage = "{0} debe contener un mínimo de {2} y máximo de {1} caracteres")]
         public string Direccion { get; set; }
 
-        [StringLength(40, MinimumLength = 1, ErrorMessage = "{0} debe contener un mínimo de {2} y máximo de {1} caracteres")]
+        [MaxLength(40)]
         public string Telefono { get; set; }
 
         [Required(ErrorMessage = "{0} es requerido")]
