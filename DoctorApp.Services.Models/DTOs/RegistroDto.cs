@@ -16,5 +16,17 @@ namespace DoctorApp.Services.Models.DTOs
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(10, MinimumLength = 4, ErrorMessage = "El password debe tener mínimo {1} y máximo {2} caracteres")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        public string Apellidos { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        public string Nombres { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        public string Rol { get; set; }
     }
 }
