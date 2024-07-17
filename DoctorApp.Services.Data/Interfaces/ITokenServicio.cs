@@ -9,6 +9,6 @@ namespace DoctorApp.Services.Data.Interfaces
 {
     public interface ITokenServicio
     {
-        string CrearToken(Usuario usuario);
+        Task<string> CrearToken(UsuarioAplicacion usuario);
     }
 }

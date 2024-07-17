@@ -1,10 +1,12 @@
 ﻿using DoctorApp.Services.BLL.Servicios.Interfaces;
 using DoctorApp.Services.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace DoctorApp.Services.API.Controllers
 {
+    [Authorize(Policy = "AdminAgendadorRol")]
     public class MedicoController : BaseApiController
     {
         public readonly IMedicoServicio _service;
