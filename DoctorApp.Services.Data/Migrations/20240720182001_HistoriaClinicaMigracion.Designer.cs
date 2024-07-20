@@ -4,6 +4,7 @@ using DoctorApp.Services.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorApp.Services.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240720182001_HistoriaClinicaMigracion")]
+    partial class HistoriaClinicaMigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,16 +168,10 @@ namespace DoctorApp.Services.Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ActualizadoPorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Apellidos")
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("varchar(60)");
-
-                    b.Property<int?>("CreadoPorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -204,10 +201,6 @@ namespace DoctorApp.Services.Data.Migrations
                         .HasColumnType("varchar(40)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActualizadoPorId");
-
-                    b.HasIndex("CreadoPorId");
 
                     b.ToTable("Pacientes");
                 });
@@ -480,21 +473,6 @@ namespace DoctorApp.Services.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Especialidad");
-                });
-
-            modelBuilder.Entity("DoctorApp.Services.Models.Entidades.Paciente", b =>
-                {
-                    b.HasOne("DoctorApp.Services.Models.Entidades.UsuarioAplicacion", "ActualizadoPor")
-                        .WithMany()
-                        .HasForeignKey("ActualizadoPorId");
-
-                    b.HasOne("DoctorApp.Services.Models.Entidades.UsuarioAplicacion", "CreadoPor")
-                        .WithMany()
-                        .HasForeignKey("CreadoPorId");
-
-                    b.Navigation("ActualizadoPor");
-
-                    b.Navigation("CreadoPor");
                 });
 
             modelBuilder.Entity("DoctorApp.Services.Models.Entidades.RolUsuarioAplicacion", b =>

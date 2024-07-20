@@ -30,7 +30,6 @@ namespace DoctorApp.Services.Data.Repositorio
                 medicoDb.Telefono = medico.Telefono;
                 medicoDb.Genero = medico.Genero;
                 medicoDb.EspecialidadId = medicoDb.EspecialidadId;
-                medicoDb.Direccion = medicoDb.Direccion;
 
                 _context.SaveChanges();
             }
