@@ -29,6 +29,32 @@ namespace DoctorApp.Services.API.Controllers
             _roleManager = roleManager;
         }
 
+        [Authorize(Policy = "AdminRol")]
+        [HttpGet]
+        public async Task<ActionResult> GetUsuarios()
+        {
+            var usuarios = await _userManager.Users.ToListAsync();
+
+            var usuariosDto = new List<UsuarioListaDto>();
+
+            foreach (var usuario in usuarios)
+            {
+                var roles = await _userManager.GetRolesAsync(usuario);
+
+                usuariosDto.Add(new UsuarioListaDto
+                {
+                    UserName = usuario.UserName,
+                    Email = usuario.Email,
+                    Nombres = usuario.Nombres,
+                    Apellidos = usuario.Apellidos,
+                    Rol = string.Join(",", roles)
+                });
+            }
+            _response.Resultado = usuariosDto;
+            _response.IsExitoso = true;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
 
         [Authorize(Policy = "AdminRol")]
         [HttpPost("registro")]
